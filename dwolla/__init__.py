@@ -507,7 +507,8 @@ class DwollaUser(object):
         return self.get("transactions/stats", **params)
 
     def send_funds(self, amount, dest, pin,
-            notes=None, assume_cost=None, facil_amount=None, dest_type=None, funds_source=None):
+                   notes=None, assume_cost=None, facil_amount=None,
+                   dest_type=None, funds_source=None, metadata={}):
         '''
         Send funds from this user account to another one.
 
@@ -549,6 +550,8 @@ class DwollaUser(object):
             params['destinationType'] = dest_type
         if funds_source:
             params['fundsSource'] = funds_source
+        if metadata:
+            params['metadata'] = metadata
 
         return self.post('transactions/send', params)
 
